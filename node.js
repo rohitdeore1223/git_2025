@@ -28,7 +28,11 @@ pipeline {
         
         stage('Deploy') {
             steps {
-                echo 'Deploying application...'
+                echo 'Deploying to Kubernetes...'
+                sh '''
+                    kubectl apply -f deployment.yaml
+                    kubectl rollout status deployment/your-deployment
+                '''
                 // Add deployment commands here
             }
         }
